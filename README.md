@@ -41,3 +41,9 @@ The application is built using **Next.js** and is designed to run locally using 
    👉 [http://localhost:3000](http://localhost:3000)
 
 ---
+
+## ⚠️ Environment Variables
+
+For testing purposes, this repository includes a .env file to simplify setup and demonstrate the application's functionality.
+In real-world projects, environment files should never be committed to version control for security and best practices.
+Make sure to use .gitignore to exclude sensitive configuration files.
