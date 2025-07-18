@@ -1,5 +1,8 @@
 "use client"
+
 import { useState, useEffect } from "react"
+
+import Image from "next/image"
 
 import { Member } from "@/types/member"
 
@@ -16,6 +19,7 @@ const FilterSearch = ({ attr, queryName, placeholder }: FilterSearchProps) => {
   const [debouncedSearch, setDebouncedSearch] = useState("")
   const [results, setResults] = useState<Member[]>([])
   const [loading, setLoading] = useState(false)
+  const [showResults, setShowResults] = useState<boolean>(true)
 
   const { selectedIds, setFilteredData, setSelectedIds } = useFilterContext()
 
@@ -97,17 +101,32 @@ const FilterSearch = ({ attr, queryName, placeholder }: FilterSearchProps) => {
 
   return (
     <div className="max-w-md relative">
-      <input
-        type="text"
-        placeholder={placeholder}
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="border px-3 py-2 w-full mb-2"
-      />
+      <div className="relative w-full max-w-md">
+        <input
+          type="text"
+          placeholder={placeholder}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border px-3 py-2 w-full bg-[#0A1117] border-[#2E2E2E] rounded-xl text-sm"
+        />
+        <button
+          type="button"
+          className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-blue-500"
+          onClick={() => setShowResults((prev) => !prev)}
+        >
+          <Image src="/chevron.svg" alt="Search" width={20} height={20} />
+        </button>
+      </div>
 
-      {loading && <p className="text-sm text-gray-500 mb-2">Searching...</p>}
+      <p
+        className={`absolute left-0 right-0 text-sm text-gray-500 transition-opacity duration-200 ${
+          loading ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        Searching...
+      </p>
 
-      {results.length > 0 && (
+      {results.length > 0 && showResults && (
         <div className="absolute left-0 right-0 bg-[#0A1117] border shadow-md z-10 rounded mt-1 max-h-60 overflow-auto">
           {results.map((member) => (
             <label

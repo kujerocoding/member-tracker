@@ -22,12 +22,15 @@ const Table = ({
   cursorStack,
 }: Props) => {
   return (
-    <div className="overflow-x-auto rounded-lg shadow">
+    <div className="overflow-x-auto rounded-b border border-[#2E2E2E]">
       <table className="min-w-full text-sm text-left text-[#667085]">
         <thead className="bg-[#0B1D26] text-xs uppercase font-semibold">
           <tr>
             {columns.map((col) => (
-              <th key={col.key} className="px-6 py-3 text-[#667085]">
+              <th
+                key={col.key}
+                className="px-6 py-3 text-[#667085] normal-case"
+              >
                 {col.title}
               </th>
             ))}
@@ -55,13 +58,11 @@ const Table = ({
         </tbody>
       </table>
 
-      <div className="flex justify-end gap-4 mt-6">
+      <div className="flex justify-end gap-6 p-6">
         <button
           onClick={() => onFetchPage(currentCursor, "prev")}
           disabled={cursorStack.length <= 1}
-          className="px-4 py-2 rounded-lg text-sm font-medium transition-colors
-               border border-gray-300 text-gray-700 bg-white 
-               hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="text-sm"
         >
           ← Previous
         </button>
@@ -69,9 +70,7 @@ const Table = ({
         <button
           onClick={() => onFetchPage(currentCursor, "next")}
           disabled={!hasNext}
-          className="px-4 py-2 rounded-lg text-sm font-medium transition-colors
-               border border-blue-500 text-white bg-blue-500 
-               hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="text-sm"
         >
           Next →
         </button>

@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 type Status = "ACTIVE" | "BLACKLISTED" | "DISABLED" | "SUSPENDED"
 
 type Props = {
@@ -8,27 +10,31 @@ type Props = {
 
 const COLOR_MAPPING: Record<
   Status,
-  { border: string; text: string; dot: string }
+  { border: string; text: string; icon: string; bgcolor: string }
 > = {
   ACTIVE: {
     border: "#085D3A",
     text: "#75E0A7",
-    dot: "#12B76A",
+    icon: "check",
+    bgcolor: "#053321",
   },
   BLACKLISTED: {
     border: "#912018",
     text: "#FDA29B",
-    dot: "#F63D68",
+    icon: "alert",
+    bgcolor: "#55160C",
   },
   DISABLED: {
     border: "#800C05",
     text: "#C01048",
-    dot: "#F63D68",
+    icon: "alert",
+    bgcolor: "#55160C",
   },
   SUSPENDED: {
     border: "#800C05",
     text: "#C01048",
-    dot: "#F63D68",
+    icon: "alert",
+    bgcolor: "#55160C",
   },
 }
 
@@ -42,12 +48,16 @@ export default function StatusFormatter({ value }: Props) {
       style={{
         borderColor: COLOR_MAPPING[value]?.border,
         color: COLOR_MAPPING[value]?.text,
+        backgroundColor: COLOR_MAPPING[value]?.bgcolor,
       }}
     >
-      <span
-        className="w-2 h-2 rounded-full"
-        style={{ backgroundColor: COLOR_MAPPING[value]?.dot }}
-      ></span>
+      <Image
+        src={`/${COLOR_MAPPING[value]?.icon}.svg`}
+        alt={COLOR_MAPPING[value]?.icon}
+        height={15}
+        width={15}
+      />
+
       {formattedValue}
     </div>
   )

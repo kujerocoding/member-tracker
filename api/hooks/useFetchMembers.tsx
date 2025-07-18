@@ -1,14 +1,3 @@
-import type { Member } from "@/types/member"
-
-type MemberEdge = {
-  node: Member
-}
-
-type PageInfo = {
-  hasNextPage: boolean
-  endCursor: string
-}
-
 export type Variables = {
   first?: number
   after?: string
@@ -20,7 +9,7 @@ export type Variables = {
   }
 }
 
-export default function useMembers() {
+export default function useFetchMembers() {
   const useLoad = async (variables: Variables) => {
     const query = `
   query ($first: Int, $after: Cursor, $filter: MemberFilterInput) {

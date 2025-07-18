@@ -5,7 +5,7 @@ import { useState, useEffect, useMemo } from "react"
 import type { Member } from "@/types/member"
 import type { Column } from "@/types/table"
 
-import useMembers from "../api/useMembers"
+import useMembers from "../api/hooks/useFetchMembers"
 import NameFormatter from "./formatters/NameFormatter"
 import VerificationStatusFormatter from "./formatters/VerificationStatusFormatter"
 import MobileNumberFormatter from "./formatters/MobileNumberFormatter"
@@ -73,7 +73,8 @@ const MembersTable = () => {
 
   const selectedItems = useMemo(() => {
     return filteredData.filter((item) => selectedIds.includes(item.id))
-  }, [filteredData, selectedIds])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedIds])
 
   const [data, setData] = useState<Member[]>([])
   const [cursorStack, setCursorStack] = useState<(string | null)[]>([])

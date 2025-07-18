@@ -39,9 +39,9 @@ const FilterPage = ({
   return (
     <main className="p-6">
       <h1 className="text-2xl font-semibold">{title}</h1>
-      <p className="text-xs mb-6">{subTitle}</p>
-      <div className="mb-4 flex flex-row gap-5">
-        <p className="text-lg py-2">Filters |</p>
+      <p className="text-xs mb-6 text-[#A3A3A3]">{subTitle}</p>
+      <div className="p-3 flex flex-row items-center gap-5 bg-[#0B1D26] rounded-t border border-[#2E2E2E]">
+        <p className="text-lg pr-4 border-white border-r">Filters</p>
         {filters.map(({ attr, filter: Filter, queryName, placeholder }) => (
           <Filter
             key={attr}
